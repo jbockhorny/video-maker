@@ -1,6 +1,6 @@
 const readline = require('readline-sync')
 const robots = {
-    text : require('./robots/text.js')
+    text: require('./robots/text.js')
 }
 
 async function start() {
@@ -8,6 +8,7 @@ async function start() {
 
     content.searchTerm = askAndReturnSeachTerm()
     content.prefix = askAndReturnPrefix()
+    content.lang = askAndReturnLanguage()
 
     await robots.text(content)
 
@@ -21,6 +22,15 @@ async function start() {
         const selectedPRefixText = prefixes[selectedPrefixIndex]
 
         return selectedPRefixText
+    }
+
+    function askAndReturnLanguage() {
+        const language = ['pt', 'en']
+        const selectedLangIndex =
+            readline.keyInSelect(language, 'choice Language: ')
+        const selectedLangText = language[selectedLangIndex]
+
+        return selectedLangText
     }
     console.log(content)
 }
